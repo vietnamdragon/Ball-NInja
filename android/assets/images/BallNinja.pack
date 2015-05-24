@@ -1,0 +1,89 @@
+
+BallNinja.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+clouds2
+  rotate: false
+  xy: 1, 261
+  size: 1000, 246
+  orig: 1000, 246
+  offset: 0, 0
+  index: -1
+clouds1
+  rotate: false
+  xy: 1, 53
+  size: 1001, 206
+  orig: 1001, 206
+  offset: 0, 0
+  index: -1
+ball
+  rotate: false
+  xy: 1, 1
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+pointy_mountains
+  rotate: false
+  xy: 1003, 339
+  size: 1001, 168
+  orig: 1001, 168
+  offset: 0, 0
+  index: -1
+bush
+  rotate: false
+  xy: 1003, 267
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+hills1
+  rotate: false
+  xy: 1004, 137
+  size: 1001, 128
+  orig: 1001, 128
+  offset: 0, 0
+  index: -1
+hills2
+  rotate: false
+  xy: 1004, 7
+  size: 1001, 128
+  orig: 1001, 128
+  offset: 0, 0
+  index: -1
+grass
+  rotate: false
+  xy: 2006, 357
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+ninja
+  rotate: false
+  xy: 2006, 275
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+mountain2
+  rotate: false
+  xy: 2007, 31
+  size: 249, 242
+  orig: 249, 242
+  offset: 0, 0
+  index: -1
+mountain3
+  rotate: false
+  xy: 2258, 110
+  size: 245, 397
+  orig: 245, 397
+  offset: 0, 0
+  index: -1
+mountain1
+  rotate: false
+  xy: 2505, 201
+  size: 286, 306
+  orig: 286, 306
+  offset: 0, 0
+  index: -1
