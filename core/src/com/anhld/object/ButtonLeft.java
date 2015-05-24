@@ -12,6 +12,7 @@ public class ButtonLeft extends AbstractGameObject implements InputProcessor{
 	
 	private ButtonLeft() {
 		// TODO Auto-generated constructor stub
+		//test
 	}
 	
 	public synchronized static ButtonLeft getInstance() {
