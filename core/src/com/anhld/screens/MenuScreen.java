@@ -7,6 +7,8 @@ import com.anhld.customviewport.MultipleVirtualViewportBuilder;
 import com.anhld.customviewport.OrthographicCameraWithVirtualViewport;
 import com.anhld.customviewport.VirtualViewport;
 import com.anhld.object.BackGround;
+import com.anhld.object.BtnControl;
+import com.anhld.object.BtnPower;
 import com.anhld.util.CameraHelper;
 import com.anhld.util.Constants;
 import com.anhld.util.GamePreferences;
@@ -116,7 +118,8 @@ public class MenuScreen extends AbstractGameScreen implements InputProcessor{
 		// TODO Auto-generated method stub
 		super.dispose();
 		batch.dispose();
-		instance = null;
+		if(instance != null)
+			instance = null;
 	}
 	@Override
 	public boolean keyDown(int keycode) {
@@ -124,10 +127,13 @@ public class MenuScreen extends AbstractGameScreen implements InputProcessor{
 			GameBase.ShowMessage("Back again to exit!");
 			Gdx.app.debug("menu back", "menu back");
 			//dispose all singleton
-			Stores.getInstance().dispose();
-			GameBase.getInstance().dispose();;
 			BackGround.getInstance().dispose();
 			GameScreen.getInstance().dispose();
+			BtnControl.getInstance().dispose();
+			//2 cai nay dispose sau cung
+			Stores.getInstance().dispose();
+			GameBase.getInstance().dispose();;
+			
 			Gdx.app.exit();
 			Task wait5Second = new Task() {
 				

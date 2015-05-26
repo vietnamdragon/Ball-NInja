@@ -2,10 +2,8 @@ package com.anhld.object;
 
 import vn.daragon.ballninja.Stores;
 
-import com.anhld.screens.GameScreen;
 import com.anhld.util.Constants;
 import com.anhld.util.MathUtil;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
@@ -40,13 +38,13 @@ public class BackGround extends AbstractGameObject{
 		this.tree1 = Stores.getInstance().getObjectStores().get(Constants.TREE1);
 		
 		for (int i = 1; i < 10; i++) {
-			if(i * hill1.getRegionWidth() > Constants.SCENE_WIDTH){
+			if(i * hill1.getRegionWidth() > SCENE_WIDTH){
 				numberOfHill = i;
 				break;
 			}
 		}
 		for (int i = 0; i < 500; i++) {
-			if(i * grass.getRegionWidth() > Constants.SCENE_WIDTH){
+			if(i * grass.getRegionWidth() > SCENE_WIDTH){
 				numberOfGrass = i;
 				break;
 			}
@@ -63,23 +61,23 @@ public class BackGround extends AbstractGameObject{
 	}
 	private void renderHill(SpriteBatch batch){
 		/*TiledDrawable title1 = new TiledDrawable(hill1);
-		title1.draw(batch, (-Constants.SCENE_WIDTH / 2 - 3) , -Constants.SCENE_HEIGHT / 6, Constants.SCENE_WIDTH,hill1.getRegionHeight());*/
+		title1.draw(batch, (-SCENE_WIDTH / 2 - 3) , -SCENE_HEIGHT / 6, SCENE_WIDTH,hill1.getRegionHeight());*/
 		//Gdx.app.debug("hill ", String.valueOf(hill1.getRegionWidth()));
 			
-		float hillPositionY = -Constants.SCENE_HEIGHT / 2 + grass.getRegionHeight() - 10;
+		float hillPositionY = -SCENE_HEIGHT / 2 + grass.getRegionHeight() - 10;
 		for (int i = 0; i < numberOfHill; i++) {
 			if(i == 0)
-				batch.draw(clouds, (-Constants.SCENE_WIDTH / 2) , hillPositionY + 90);
+				batch.draw(clouds, (-SCENE_WIDTH / 2) , hillPositionY + 90);
 			else {
-				batch.draw(clouds, (-Constants.SCENE_WIDTH / 2) + (i * clouds.getRegionWidth()) -3 , hillPositionY + 90);
+				batch.draw(clouds, (-SCENE_WIDTH / 2) + (i * clouds.getRegionWidth()) -3 , hillPositionY + 90);
 			}
 		}
 		batch.setColor(MathUtil.convertR(213),MathUtil.convertG(237) , MathUtil.convertB(247), 1);
 		for (int i = 0; i < numberOfHill; i++) {
 			if(i == 0)
-				batch.draw(pointyMountains, (-Constants.SCENE_WIDTH / 2) - 30, hillPositionY + 50);
+				batch.draw(pointyMountains, (-SCENE_WIDTH / 2) - 30, hillPositionY + 50);
 			else {
-				batch.draw(pointyMountains, ((-Constants.SCENE_WIDTH / 2) - 30) + (pointyMountains.getRegionWidth() * i) -3, hillPositionY + 50);
+				batch.draw(pointyMountains, ((-SCENE_WIDTH / 2) - 30) + (pointyMountains.getRegionWidth() * i) -3, hillPositionY + 50);
 			}
 		}
 		
@@ -88,10 +86,10 @@ public class BackGround extends AbstractGameObject{
 		for (int i = 0; i < numberOfHill; i++) {
 			if(i == 0){
 				//Gdx.app.debug("hill ", "draw");
-				batch.draw(hill1, (-Constants.SCENE_WIDTH / 2) , hillPositionY);
+				batch.draw(hill1, (-SCENE_WIDTH / 2) , hillPositionY);
 			}
 			else {
-				batch.draw(hill1, (-Constants.SCENE_WIDTH / 2) + (hill1.getRegionWidth() * i) -3, hillPositionY);
+				batch.draw(hill1, (-SCENE_WIDTH / 2) + (hill1.getRegionWidth() * i) -3, hillPositionY);
 			}
 		}
 		//System.out.println(batch.getColor().r + " " + batch.getColor().g + " " + batch.getColor().b + " " + batch.getColor().a);
@@ -99,18 +97,19 @@ public class BackGround extends AbstractGameObject{
 		
 		for (int i = 0; i < numberOfGrass; i++) {
 			if(i == 0)
-				batch.draw(grass, (-Constants.SCENE_WIDTH / 2) , -Constants.SCENE_HEIGHT / 2 );
+				batch.draw(grass, (-SCENE_WIDTH / 2) , -SCENE_HEIGHT / 2 );
 			else {
-				batch.draw(grass, (-Constants.SCENE_WIDTH / 2) + (i * grass.getRegionWidth()), -Constants.SCENE_HEIGHT / 2);
+				batch.draw(grass, (-SCENE_WIDTH / 2) + (i * grass.getRegionWidth()), -SCENE_HEIGHT / 2);
 			}
 		}
 		
-		batch.draw(tree1, Constants.SCENE_WIDTH / 2 - 2 * tree1.getRegionWidth() - 50 , hillPositionY + 10);
-		batch.draw(tree1, (-Constants.SCENE_WIDTH / 2) + tree1.getRegionWidth(), hillPositionY + 10);
-		batch.draw(tree1, -Constants.SCENE_WIDTH / 2 + tree1.getRegionWidth() + 10, hillPositionY + 10);
+		batch.draw(tree1, SCENE_WIDTH / 2 - 2 * tree1.getRegionWidth() - 50 , hillPositionY + 10);
+		batch.draw(tree1, (-SCENE_WIDTH / 2) + tree1.getRegionWidth(), hillPositionY + 10);
+		batch.draw(tree1, -SCENE_WIDTH / 2 + tree1.getRegionWidth() + 10, hillPositionY + 10);
 	}
 	
 	public void dispose(){
-		instance = null;
+		if(instance != null)
+			instance = null;
 	}
 }

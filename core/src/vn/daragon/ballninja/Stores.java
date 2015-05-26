@@ -62,7 +62,8 @@ public class Stores implements Disposable{
 		instance.fontShader.dispose();*/
 		Gdx.app.debug("clear store", "clear store");
 		objectStores.clear();
-		instance = null;
+		if(instance != null)
+			instance = null;
 	}
 
 	public Sound getSound(String name){

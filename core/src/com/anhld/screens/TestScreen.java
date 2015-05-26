@@ -110,7 +110,8 @@ public class TestScreen extends AbstractGameScreen implements InputProcessor{
 		// TODO Auto-generated method stub
 		super.dispose();
 		batch.dispose();
-		instance = null;
+		if(instance != null)
+			instance = null;
 	}
 	@Override
 	public boolean keyDown(int keycode) {

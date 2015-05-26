@@ -12,7 +12,10 @@ public class Ninja extends AbstractGameObject{
 	private AtlasRegion ninja;
 	public Ninja() {
 		super();
-		this.ninja = Stores.getInstance().getObjectStores().get(Constants.NINJA);
+		this.ninja = Stores.getInstance().getObjectStores().get(Constants.BLOCK);
+		float ninjaPositionY = -SCENE_HEIGHT / 2 + Stores.getInstance().getObjectStores().get(Constants.GRASS).getRegionHeight();
+		position.x = 0;
+		position.y = ninjaPositionY;
 	}
 
 	@Override

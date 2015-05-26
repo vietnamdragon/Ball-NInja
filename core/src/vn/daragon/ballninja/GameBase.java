@@ -18,7 +18,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class GameBase extends DirectedGame {
 	
 	private static AssetManager assetManager;
-	private static Texture splashScreen;
+	//private static Texture splashScreen;
 	private static SpriteBatch batch;
 	private Boolean loadToStore = false;
 	private BitmapFont defaultSmall;
@@ -43,9 +43,9 @@ public class GameBase extends DirectedGame {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
-		assetManager.load(Constants.TEXTURE_SPLASH_SCREEN, Texture.class);
-		assetManager.finishLoading(); // Blocks until all resources are loaded into memory
-		splashScreen = assetManager.get(Constants.TEXTURE_SPLASH_SCREEN);
+		//assetManager.load(Constants.TEXTURE_SPLASH_SCREEN, Texture.class);
+		//assetManager.finishLoading(); // Blocks until all resources are loaded into memory //iclude this line if load splash screen
+		//splashScreen = assetManager.get(Constants.TEXTURE_SPLASH_SCREEN);
 		assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
 		// load sounds
 		assetManager.load("sounds/soundyes.wav", Sound.class);
@@ -68,11 +68,11 @@ public class GameBase extends DirectedGame {
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-		Gdx.gl.glClearColor(255.0f, 255.0f, 255.0f, 255.0f);
+		Gdx.gl.glClearColor(126 / 255.0f, 192 / 255.0f, 238 / 255.0f,1);
 		// Clears the screen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(splashScreen, 0 , 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		//batch.draw(splashScreen, 0 , 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch.end();
 		
 		if(assetManager.update() && !loadToStore){ //done load data
@@ -100,9 +100,10 @@ public class GameBase extends DirectedGame {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		assetManager.dispose();
-		instance = null;
+		if(instance != null)
+			instance = null;
 		Gdx.app.debug("asset dispose", "asset dispose");
-		splashScreen.dispose();
+		//splashScreen.dispose();
 		assetManager.dispose();
 		super.dispose();
 	}

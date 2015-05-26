@@ -17,6 +17,9 @@
 
 package com.anhld.object;
 
+import com.anhld.customviewport.MultipleVirtualViewportBuilder;
+import com.anhld.customviewport.VirtualViewport;
+import com.anhld.util.Constants;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -37,7 +40,8 @@ public abstract class AbstractGameObject{
 	public Vector2 friction;
 	public Vector2 acceleration;
 	public Rectangle bounds;
-
+	public int SCENE_WIDTH;
+	public int SCENE_HEIGHT;
 	public AbstractGameObject () {
 		position = new Vector2();
 		dimension = new Vector2(1, 1);
@@ -49,6 +53,15 @@ public abstract class AbstractGameObject{
 		friction = new Vector2();
 		acceleration = new Vector2();
 		bounds = new Rectangle();
+		
+		//VITUAL SCREEN 
+		MultipleVirtualViewportBuilder multipleVirtualViewportBuilder = new MultipleVirtualViewportBuilder(
+				Constants.MIN_SCENE_WIDTH, Constants.MIN_SCENE_HEIGHT,
+				Constants.MAX_SCENE_WIDTH, Constants.MAX_SCENE_HEIGHT);
+		VirtualViewport virtualViewport = multipleVirtualViewportBuilder.getVirtualViewport(
+				Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		SCENE_WIDTH = (int) virtualViewport.getVirtualWidth();
+		SCENE_HEIGHT = (int) virtualViewport.getVirtualHeight();
 	}
 
 	public void update (float deltaTime) {

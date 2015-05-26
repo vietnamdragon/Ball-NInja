@@ -7,6 +7,9 @@ import com.anhld.customviewport.OrthographicCameraWithVirtualViewport;
 import com.anhld.customviewport.VirtualViewport;
 import com.anhld.object.BackGround;
 import com.anhld.object.Ball;
+import com.anhld.object.BtnControl;
+import com.anhld.object.BtnPower;
+import com.anhld.object.Ninja;
 import com.anhld.util.CameraHelper;
 import com.anhld.util.Constants;
 import com.anhld.util.GamePreferences;
@@ -25,15 +28,16 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 	private boolean paused;
 	private VirtualViewport virtualViewport = null;
 	private MultipleVirtualViewportBuilder multipleVirtualViewportBuilder;
-	public static OrthographicCameraWithVirtualViewport camera;
+	private  OrthographicCameraWithVirtualViewport camera;
 	private SpriteBatch batch;
 	private CameraHelper cameraHelper;
 	private InputMultiplexer multiplexer = new InputMultiplexer();
 	private static GameScreen instance = null;
 	
 	Ball ball = new Ball();
+	Ninja ninja = new Ninja();
 	BackGround bg = BackGround.getInstance();
-
+	BtnControl lr = BtnControl.getInstance();
 	private void init() {
 		batch = new SpriteBatch();
 		multipleVirtualViewportBuilder = new MultipleVirtualViewportBuilder(
@@ -45,8 +49,8 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 		camera.position.set(0, 0f, 0f);
 		cameraHelper = new CameraHelper();
 		multiplexer.addProcessor(this);
-		ball.position.x = -Constants.SCENE_WIDTH /2;
-		ball.position.y = -Constants.SCENE_HEIGHT /2;
+		multiplexer.addProcessor(lr);
+
 		ball.updateVelocity(new Vector2(50, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
 		//ball.updateAcceleration(new Vector2(0, -9.8f));
 	}
@@ -71,11 +75,11 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 			// update logic for this screen
 			Gdx.input.setInputProcessor(multiplexer);
 			ball.update(deltaTime);
+			ninja.update(deltaTime);
 			//System.out.println(ball.velocity.y);
 		}
 		// Sets the clear screen color to: Cornflower Blue
-		Gdx.gl.glClearColor(126 / 255.0f, 192 / 255.0f, 238 / 255.0f,
-				0xff / 255.0f);
+		Gdx.gl.glClearColor(126 / 255.0f, 192 / 255.0f, 238 / 255.0f,1);
 		// Clears the screen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -88,9 +92,8 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 			// your code here
 			if(bg != null)
 				bg.render(batch);
-			else {
-				Gdx.app.debug("bg ", "null");
-			}
+			lr.render(batch);
+			ninja.render(batch);
 			ball.render(batch);
 			// your code here
 			batch.end();
@@ -143,7 +146,8 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 		// TODO Auto-generated method stub
 		super.dispose();
 		batch.dispose();
-		instance = null;
+		if(instance != null)
+			instance = null;
 	}
 
 	@Override
@@ -201,5 +205,18 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public OrthographicCameraWithVirtualViewport getCamera() {
+		return camera;
+	}
 
+
+
+	public VirtualViewport getVirtualViewport() {
+		return virtualViewport;
+	}
+	
+	public void UpdateVolecityNinja(int velocityX,int velocityY){
+		ninja.updateVelocity(new Vector2(velocityX, velocityY), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
+	}
 }
