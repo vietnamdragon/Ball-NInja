@@ -6,16 +6,27 @@ import com.anhld.util.Constants;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Disposable;
 
-public class Ninja extends AbstractGameObject{
+public class Ninja extends AbstractGameObject implements Disposable{
 
 	private AtlasRegion ninja;
-	public Ninja() {
-		super();
+	private int regionWidth;
+	private static Ninja instance = null;
+	
+	public synchronized static Ninja getInstance(){
+		if(instance == null){
+			instance = new Ninja();
+		}
+		return instance;
+	}
+	
+	private Ninja() {
 		this.ninja = Stores.getInstance().getObjectStores().get(Constants.BLOCK);
 		float ninjaPositionY = -SCENE_HEIGHT / 2 + Stores.getInstance().getObjectStores().get(Constants.GRASS).getRegionHeight();
 		position.x = 0;
 		position.y = ninjaPositionY;
+		regionWidth = ninja.getRegionWidth();
 	}
 
 	@Override
@@ -23,13 +34,17 @@ public class Ninja extends AbstractGameObject{
 		// TODO Auto-generated method stub
 		if(ninja != null){
 			batch.draw(ninja, position.x, position.y);
-		}
+		} 
 	}
 
 	@Override
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
 		super.update(deltaTime);
+		if(ninja != null){
+			if(position.x >= SCENE_WIDTH /2 - ninja.getRegionWidth() || position.x <= -SCENE_WIDTH /2)
+				updateVelocity(new Vector2(0, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
+		}
 	}
 
 	@Override
@@ -50,5 +65,19 @@ public class Ninja extends AbstractGameObject{
 		super.updateVelocity(velocity, terminalVelocity);
 	}
 
-	
+	public int getRegionWidth() {
+		return regionWidth;
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		if(instance != null)
+			instance = null;
+	}
+
+	public Vector2 getCurrentPosition() {
+		
+		return new Vector2(position.x + ninja.getRegionWidth() / 2, position.y);
+	}
 }

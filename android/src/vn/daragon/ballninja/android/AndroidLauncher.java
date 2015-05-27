@@ -54,7 +54,7 @@ public class AndroidLauncher extends AndroidApplication {
 								// positioning in createGameView()
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE); //ads is top
 		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
 		adView.setLayoutParams(params);
 		adView.setBackgroundColor(Color.BLACK);
@@ -66,9 +66,9 @@ public class AndroidLauncher extends AndroidApplication {
 		gameView = initializeForView(GameBase.getInstance(), cfg);
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE); //game play is bottom
 		params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-		params.addRule(RelativeLayout.ABOVE, adView.getId());
+		params.addRule(RelativeLayout.BELOW, adView.getId()); //swich here if you change ads position
 		gameView.setLayoutParams(params);
 		return gameView;
 	}

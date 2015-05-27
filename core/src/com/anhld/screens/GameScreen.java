@@ -8,7 +8,6 @@ import com.anhld.customviewport.VirtualViewport;
 import com.anhld.object.BackGround;
 import com.anhld.object.Ball;
 import com.anhld.object.BtnControl;
-import com.anhld.object.BtnPower;
 import com.anhld.object.Ninja;
 import com.anhld.util.CameraHelper;
 import com.anhld.util.Constants;
@@ -35,7 +34,7 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 	private static GameScreen instance = null;
 	
 	Ball ball = new Ball();
-	Ninja ninja = new Ninja();
+	Ninja ninja = Ninja.getInstance();
 	BackGround bg = BackGround.getInstance();
 	BtnControl lr = BtnControl.getInstance();
 	private void init() {
@@ -51,7 +50,7 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 		multiplexer.addProcessor(this);
 		multiplexer.addProcessor(lr);
 
-		ball.updateVelocity(new Vector2(50, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
+		ball.updateVelocity(new Vector2(100, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
 		//ball.updateAcceleration(new Vector2(0, -9.8f));
 	}
 
@@ -217,6 +216,9 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 	}
 	
 	public void UpdateVolecityNinja(int velocityX,int velocityY){
-		ninja.updateVelocity(new Vector2(velocityX, velocityY), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
+		if(ninja.position.x < ninja.SCENE_WIDTH /2 - ninja.getRegionWidth() && velocityX >= 0)
+			ninja.updateVelocity(new Vector2(velocityX, velocityY), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
+		if(ninja.position.x > -ninja.SCENE_WIDTH /2 && velocityX <= 0)
+			ninja.updateVelocity(new Vector2(velocityX, velocityY), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
 	}
 }

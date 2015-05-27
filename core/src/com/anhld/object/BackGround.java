@@ -112,4 +112,8 @@ public class BackGround extends AbstractGameObject{
 		if(instance != null)
 			instance = null;
 	}
+	
+	public float getGrassHeight(){
+		return grass.getRegionHeight();
+	}
 }

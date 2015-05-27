@@ -9,6 +9,7 @@ import com.anhld.customviewport.VirtualViewport;
 import com.anhld.object.BackGround;
 import com.anhld.object.BtnControl;
 import com.anhld.object.BtnPower;
+import com.anhld.object.Ninja;
 import com.anhld.util.CameraHelper;
 import com.anhld.util.Constants;
 import com.anhld.util.GamePreferences;
@@ -130,6 +131,7 @@ public class MenuScreen extends AbstractGameScreen implements InputProcessor{
 			BackGround.getInstance().dispose();
 			GameScreen.getInstance().dispose();
 			BtnControl.getInstance().dispose();
+			Ninja.getInstance().dispose();
 			//2 cai nay dispose sau cung
 			Stores.getInstance().dispose();
 			GameBase.getInstance().dispose();;

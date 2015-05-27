@@ -2,8 +2,8 @@ package com.anhld.util;
 
 public class MathUtil {
 	
-	public static double getDistance(int x1,int y1,int x2,int y2){
-		return Math.sqrt(Math.pow(Math.abs(x2 -x1), 2) + Math.pow(Math.abs(y2 -y1), 2));
+	public static float getDistance(Float x1,Float y1,Float x2,Float y2){
+		return (float) Math.sqrt(Math.pow(Math.abs(x2 -x1), 2) + Math.pow(Math.abs(y2 -y1), 2));
 	}
 	
 	public static float convertR(int r){

@@ -6,6 +6,7 @@ import com.anhld.screens.GameScreen;
 import com.anhld.util.Constants;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -24,10 +25,12 @@ public class BtnControl extends AbstractGameObject implements InputProcessor,Dis
 	private AtlasRegion powerBlue;
 	private Vector2 powerPosition;
 	private static BtnControl instance = null;
-	private String lastestTouch = "";
 	private final String leftTouch = "LEFT_TOUCH";
 	private final String rightTouch = "RIGHT_TOUCH";
 	private final String powerTouch = "POWER_TOUCH";
+	private Sprite sLeft;
+	private Sprite sRight;
+	private Sprite sPower;
 	private BtnControl() {
 		this.btnLeft = Stores.getInstance().getObjectStores().get(Constants.BTN_LEFT);
 		this.btnRight = Stores.getInstance().getObjectStores().get(Constants.BTN_RIGHT);
@@ -37,6 +40,12 @@ public class BtnControl extends AbstractGameObject implements InputProcessor,Dis
 		this.powerGreen = Stores.getInstance().getObjectStores().get(Constants.BTN_POWER_GREEN);
 		this.powerBlue = Stores.getInstance().getObjectStores().get(Constants.BTN_POWER_BLUE);
 		this.powerPosition = new Vector2(SCENE_WIDTH / 2 - 2 *  powerRed.getRegionWidth(), -SCENE_HEIGHT / 2 );
+		sLeft = new Sprite(btnLeft);
+		sRight = new Sprite(btnRight);
+		sPower = new Sprite(powerRed);
+		sLeft.setPosition(leftPosition.x, leftPosition.y);
+		sRight.setPosition(rightPosition.x, rightPosition.y);
+		sPower.setPosition(powerPosition.x, powerPosition.y);
 	}
 	
 	public synchronized static BtnControl getInstance() {
@@ -48,15 +57,18 @@ public class BtnControl extends AbstractGameObject implements InputProcessor,Dis
 	
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.draw(btnLeft, leftPosition.x, leftPosition.y);
-		batch.draw(btnRight, rightPosition.x , rightPosition.y);
-		if(power == 1)
+		//batch.draw(btnLeft, leftPosition.x, leftPosition.y);
+		//batch.draw(btnRight, rightPosition.x , rightPosition.y);
+		sLeft.draw(batch);
+		sRight.draw(batch);
+		sPower.draw(batch);
+		/*if(power == 1)
 			batch.draw(powerRed, powerPosition.x, powerPosition.y);
 		else if (power == 2) {
 			batch.draw(powerGreen, powerPosition.x, powerPosition.y);
 		}else {
 			batch.draw(powerBlue, powerPosition.x, powerPosition.y);
-		}
+		}*/
 	}
 
 	@Override
@@ -83,20 +95,20 @@ public class BtnControl extends AbstractGameObject implements InputProcessor,Dis
 		if (bounds.contains(tmp.x, tmp.y)) {
 			Gdx.app.debug("left click", "left click");
 			GameScreen.getInstance().UpdateVolecityNinja(-50, 0);
-			lastestTouch = leftTouch;
+			sLeft.setScale(1.2f);
 		}
 		bounds.set(rightPosition.x, rightPosition.y,
 				btnRight.getRegionWidth(), btnRight.getRegionHeight());
 		if (bounds.contains(tmp.x, tmp.y)) {
 			Gdx.app.debug("right click", "right click");
 			GameScreen.getInstance().UpdateVolecityNinja(50, 0);
-			lastestTouch  = rightTouch;
+			sRight.setScale(1.2f);
 		}
 		bounds.set(powerPosition.x, powerPosition.y,
 				powerRed.getRegionWidth(), powerRed.getRegionHeight());
 		if (bounds.contains(tmp.x, tmp.y)) {
 			Gdx.app.debug("power down", "power down");
-			lastestTouch = powerTouch;
+			sPower.setScale(1.2f);
 		}
 		return false;
 	}
@@ -110,12 +122,16 @@ public class BtnControl extends AbstractGameObject implements InputProcessor,Dis
 				btnLeft.getRegionWidth(), btnLeft.getRegionHeight());
 		if (bounds.contains(tmp.x, tmp.y)) {
 			GameScreen.getInstance().UpdateVolecityNinja(0, 0);
+			
 		}
 		bounds.set(rightPosition.x, rightPosition.y,
 				btnRight.getRegionWidth(), btnRight.getRegionHeight());
 		if (bounds.contains(tmp.x, tmp.y)) {
 			GameScreen.getInstance().UpdateVolecityNinja(0, 0);
-		}	
+		}
+		sLeft.setScale(1);
+		sRight.setScale(1);
+		sPower.setScale(1);
 		return false;
 	}
 
