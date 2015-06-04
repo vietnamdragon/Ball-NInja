@@ -42,7 +42,16 @@ public class Constants {
 	public static final String BTN_POWER_GREEN = "laserGreen14";
 	public static final String BTN_POWER_RED = "laserRed08";
 	
-	public static final String[] OBJECTS = new String[] {CLOUDS1,CLOUDS2,HILL1,HILL2,MOUNTAIN1,MOUNTAIN2,MOUNTAIN3,POINTY_MOUNTAINS,TREE1,GRASS,BTN_LEFT,BTN_RIGHT,BTN_POWER_BLUE,BTN_POWER_GREEN,BTN_POWER_RED,BALL,BLOCK};
+	//new laser
+	public static final String LASER_END4OVERLAY = "end4Overlay";
+	public static final String LASER_END6 = "end6";
+	public static final String LASER = "laser";
+	public static final String LASER_OVERLAY01 = "laseroverlay01";
+	public static final String LASER_OVERLAYSTATIC = "laserOverlayStatic";
+	public static final String LASER_START2 = "start2";
+	public static final String LASER_STAR2OVER = "start2Over";
+	
+	public static final String[] OBJECTS = new String[] {CLOUDS1,CLOUDS2,HILL1,HILL2,MOUNTAIN1,MOUNTAIN2,MOUNTAIN3,POINTY_MOUNTAINS,TREE1,GRASS,BTN_LEFT,BTN_RIGHT,BTN_POWER_BLUE,BTN_POWER_GREEN,BTN_POWER_RED,BALL,BLOCK,LASER,LASER_END4OVERLAY,LASER_END6,LASER_OVERLAY01,LASER_OVERLAYSTATIC,LASER_STAR2OVER,LASER_START2};
 	// Game preferences file
 	public static final String PREFERENCES = "gamebase.prefs";
 

@@ -31,6 +31,55 @@ lollipopRed20
   orig: 20, 20
   offset: 0, 0
   index: -1
+end4Overlay
+  rotate: false
+  xy: 23, 7
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+end6
+  rotate: false
+  xy: 33, 39
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+laser
+  rotate: false
+  xy: 41, 21
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+laseroverlay01
+  rotate: false
+  xy: 51, 39
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+laserOverlayStatic
+  rotate: false
+  xy: 41, 3
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+start2
+  rotate: false
+  xy: 59, 21
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+start2Over
+  rotate: false
+  xy: 69, 39
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 pointy_mountains
   rotate: false
   xy: 1003, 343

@@ -3,12 +3,14 @@ package com.anhld.object;
 import vn.daragon.ballninja.Stores;
 
 import com.anhld.screens.GameScreen;
+import com.anhld.util.CollisionUtil;
 import com.anhld.util.Constants;
 import com.anhld.util.MathUtil;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Ball extends AbstractGameObject{
@@ -24,8 +26,11 @@ public class Ball extends AbstractGameObject{
 	public Ball() {
 		super();
 		this.ball = Stores.getInstance().getObjectStores().get(Constants.BALL);
-		
-		position.x = -SCENE_WIDTH /2;
+		if(MathUtils.random(0, 2) == 1)
+			position.x = -SCENE_WIDTH /2;
+		else {
+			position.x = SCENE_WIDTH /2;
+		}
 		position.y = MathUtils.random(-SCENE_HEIGHT / 4, SCENE_HEIGHT / 4);
 		sBall = new Sprite(ball);
 		//ball.setRegionWidth(50);
@@ -47,6 +52,8 @@ public class Ball extends AbstractGameObject{
 		// TODO Auto-generated method stub
 		super.update(deltaTime);
 		sBall.rotate(5);
+		if(CollisionUtil.isCollisionDetected(new Rectangle(position.x, position.y, ball.getRegionWidth(), ball.getRegionHeight()), Ninja.getInstance().getRect()))
+			GameScreen.getInstance().pause();
 		/*if(position.y <= 0)
 			updateVelocity(new Vector2(0, 50), new Vector2(x, y));*/
 		/*if(nextTarget != null)
@@ -61,6 +68,11 @@ public class Ball extends AbstractGameObject{
 	protected void updateMotionX(float deltaTime) {
 		// TODO Auto-generated method stub
 		super.updateMotionX(deltaTime);
+		if(position.x <= -SCENE_WIDTH / 2)
+			position.x = -SCENE_WIDTH / 2;
+		else if (position.x >= SCENE_WIDTH / 2 - ball.getRegionWidth()) {
+			position.x = SCENE_WIDTH / 2 - ball.getRegionWidth();
+		}
 		if(position.x <= -SCENE_WIDTH / 2 || position.x >= SCENE_WIDTH / 2 - ball.getRegionWidth()){
 			isBound = true;
 			updateVelocity(new Vector2(0, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
@@ -73,7 +85,8 @@ public class Ball extends AbstractGameObject{
 		// TODO Auto-generated method stub
 		super.updateMotionY(deltaTime);
 		//position.y = (float) ((-2 * SCENE_HEIGHT * Math.pow(position.x, 2)) / (Math.pow(SCENE_WIDTH,2)));
-		
+		if(position.y < -SCENE_HEIGHT / 2 + BackGround.getInstance().getGrassHeight())
+			position.y = -SCENE_HEIGHT / 2 + BackGround.getInstance().getGrassHeight();
 		//neu chua cham vao bien thi update Y
 		if(!isBound){
 			position.y = a * position.x * position.x + b * position.x + c;
@@ -100,7 +113,7 @@ public class Ball extends AbstractGameObject{
 			int numberOfStep = MathUtils.floor(distanceToTarget / Math.abs(STEP));
 			float nextTargetX;
 			if(position.x < 0){ //left
-				STEP = 150;
+				STEP = MathUtils.random(130, 160);
 				nextTargetX = -SCENE_WIDTH / 2 + (distanceToTarget - numberOfStep * Math.abs(STEP));
 				nextTarget = new Vector2(nextTargetX, -SCENE_HEIGHT / 2 + BackGround.getInstance().getGrassHeight());
 				if(MathUtil.getDistance(position.x, position.y, nextTarget.x, nextTarget.y) < 130)
@@ -110,7 +123,7 @@ public class Ball extends AbstractGameObject{
 				isBound = false; //cho phep chuyen dong theo quy dao moi
 				
 			}else {
-				STEP = -150;
+				STEP =  -MathUtils.random(130, 160);;
 				nextTargetX = SCENE_WIDTH / 2 - (distanceToTarget - numberOfStep * Math.abs(STEP));
 				nextTarget = new Vector2(nextTargetX, -SCENE_HEIGHT / 2 + BackGround.getInstance().getGrassHeight());
 				if(MathUtil.getDistance(position.x, position.y, nextTarget.x, nextTarget.y) < 130)
@@ -140,7 +153,7 @@ public class Ball extends AbstractGameObject{
 		
 		//tinh toa do cua dinh
 		float dinhX = (A.x + B.x) / 2;
-		float dinhY = 0;
+		float dinhY = MathUtils.random(0, 50);
 		Vector2 C = new Vector2(dinhX, dinhY);
 		float[][] matrixD = new float[4][4];
 		//nhap matrix D

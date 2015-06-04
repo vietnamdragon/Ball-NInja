@@ -109,6 +109,7 @@ public class BtnControl extends AbstractGameObject implements InputProcessor,Dis
 		if (bounds.contains(tmp.x, tmp.y)) {
 			Gdx.app.debug("power down", "power down");
 			sPower.setScale(1.2f);
+			GameScreen.getInstance().shootLase();
 		}
 		return false;
 	}
@@ -144,7 +145,6 @@ public class BtnControl extends AbstractGameObject implements InputProcessor,Dis
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		Gdx.app.debug("move", "move");
 		return false;
 	}
 

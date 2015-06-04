@@ -5,6 +5,7 @@ import vn.daragon.ballninja.Stores;
 import com.anhld.util.Constants;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -79,5 +80,9 @@ public class Ninja extends AbstractGameObject implements Disposable{
 	public Vector2 getCurrentPosition() {
 		
 		return new Vector2(position.x + ninja.getRegionWidth() / 2, position.y);
+	}
+	
+	public Rectangle getRect(){
+		return new Rectangle(position.x, position.y, ninja.getRegionWidth(), ninja.getRegionHeight());
 	}
 }

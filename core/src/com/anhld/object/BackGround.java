@@ -4,6 +4,7 @@ import vn.daragon.ballninja.Stores;
 
 import com.anhld.util.Constants;
 import com.anhld.util.MathUtil;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
@@ -63,7 +64,8 @@ public class BackGround extends AbstractGameObject{
 		/*TiledDrawable title1 = new TiledDrawable(hill1);
 		title1.draw(batch, (-SCENE_WIDTH / 2 - 3) , -SCENE_HEIGHT / 6, SCENE_WIDTH,hill1.getRegionHeight());*/
 		//Gdx.app.debug("hill ", String.valueOf(hill1.getRegionWidth()));
-			
+		Color tempColor = batch.getColor();
+		batch.setColor(MathUtil.convertR(226),MathUtil.convertG(237) , MathUtil.convertB(255), 1);
 		float hillPositionY = -SCENE_HEIGHT / 2 + grass.getRegionHeight() - 10;
 		for (int i = 0; i < numberOfHill; i++) {
 			if(i == 0)
@@ -106,6 +108,7 @@ public class BackGround extends AbstractGameObject{
 		batch.draw(tree1, SCENE_WIDTH / 2 - 2 * tree1.getRegionWidth() - 50 , hillPositionY + 10);
 		batch.draw(tree1, (-SCENE_WIDTH / 2) + tree1.getRegionWidth(), hillPositionY + 10);
 		batch.draw(tree1, -SCENE_WIDTH / 2 + tree1.getRegionWidth() + 10, hillPositionY + 10);
+		batch.setColor(tempColor);
 	}
 	
 	public void dispose(){
