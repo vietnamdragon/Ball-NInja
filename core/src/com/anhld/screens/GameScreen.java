@@ -1,5 +1,9 @@
 package com.anhld.screens;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+
 import vn.daragon.ballninja.GameBase;
 import vn.daragon.ballninja.Stores;
 
@@ -8,6 +12,7 @@ import com.anhld.customviewport.OrthographicCameraWithVirtualViewport;
 import com.anhld.customviewport.VirtualViewport;
 import com.anhld.object.BackGround;
 import com.anhld.object.Ball;
+import com.anhld.object.BallManager;
 import com.anhld.object.BtnControl;
 import com.anhld.object.Laser;
 import com.anhld.object.Ninja;
@@ -37,8 +42,8 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 	private CameraHelper cameraHelper;
 	private InputMultiplexer multiplexer = new InputMultiplexer();
 	private static GameScreen instance = null;
-
-	Ball ball = new Ball();
+	private int ballSize = 10;
+	private Set<String> ballsActive = new CopyOnWriteArraySet<String>();
 	Ninja ninja = Ninja.getInstance();
 	BackGround bg = BackGround.getInstance();
 	BtnControl control = BtnControl.getInstance();
@@ -56,10 +61,6 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 		cameraHelper = new CameraHelper();
 		multiplexer.addProcessor(this);
 		multiplexer.addProcessor(control);
-
-		// ball.updateVelocity(new Vector2(100, 0), new Vector2(Float.MAX_VALUE,
-		// Float.MAX_VALUE));
-		// ball.updateAcceleration(new Vector2(0, -9.8f));
 	}
 
 	private GameScreen() {
@@ -79,7 +80,13 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 		if (!paused) {
 			// update logic for this screen
 			Gdx.input.setInputProcessor(multiplexer);
-			ball.update(deltaTime);
+			if(ballsActive.size() > 0){
+				for (String ball : ballsActive) {
+					BallManager.getInstance().getBallByKey(ball).update(deltaTime);;
+				}
+			}else {
+				nextLevel();
+			}
 			ninja.update(deltaTime);
 			laser.update(deltaTime);
 			// System.out.println(ball.velocity.y);
@@ -101,7 +108,11 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 				bg.render(batch);
 			control.render(batch);
 			ninja.render(batch);
-			ball.render(batch);
+			if(ballsActive.size() > 0){
+				for (String ball : ballsActive) {
+					BallManager.getInstance().getBallByKey(ball).render(batch);
+				}
+			}
 			laser.render(batch);
 			// your code here
 			batch.end();
@@ -243,5 +254,27 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor {
 			laser.position.y = ninja.position.y;
 			laser.setFinish(false);
 		}
+	}
+	
+	public Vector2 getPositionLaser(){
+		if(!laser.isFinish())
+			return new Vector2(laser.position.x, laser.position.y);
+		else {
+			return new Vector2(Float.MAX_VALUE, Float.MAX_VALUE);
+		}
+	}
+	
+	private void nextLevel(){
+		ballSize += 10;
+		ballsActive.add(BallManager.getInstance().getBall(ballSize).getKey());
+	}
+	
+	public void removeBallActive(String key){
+		if(ballsActive.contains(key))
+			ballsActive.remove(key);
+	}
+	
+	public void addBallActive(String key){
+		ballsActive.add(key);
 	}
 }

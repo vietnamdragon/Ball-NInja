@@ -1,6 +1,5 @@
 package com.anhld.util;
 
-import com.badlogic.gdx.Gdx;
 
 public class Constants {
 
@@ -17,7 +16,14 @@ public class Constants {
 	public static final String FONTS_LOCATION = "fonts/arial-15.fnt";
 	
 	//game object
-	public static final String BALL = "lollipopRed20";
+	public static final String BALL_BLUE = "alienBlue_round";
+	public static final String BALL_BLUE10 = "alienBlue_round10";
+	public static final String BALL_BLUE20 = "alienBlue_round20";
+	public static final String BALL_BLUE30 = "alienBlue_round30";
+	public static final String BALL_BLUE40 = "alienBlue_round40";
+	public static final String BALL_BLUE50 = "alienBlue_round50";
+	public static final String BALL_BLUE60 = "alienBlue_round60";
+	public static final String BALL_BLUE70 = "alienBlue_round70";
 	public static final String BLOCK = "slimeBlock";
 	
 	public static final String CLOUDS1 = "clouds1";
@@ -51,7 +57,7 @@ public class Constants {
 	public static final String LASER_START2 = "start2";
 	public static final String LASER_STAR2OVER = "start2Over";
 	
-	public static final String[] OBJECTS = new String[] {CLOUDS1,CLOUDS2,HILL1,HILL2,MOUNTAIN1,MOUNTAIN2,MOUNTAIN3,POINTY_MOUNTAINS,TREE1,GRASS,BTN_LEFT,BTN_RIGHT,BTN_POWER_BLUE,BTN_POWER_GREEN,BTN_POWER_RED,BALL,BLOCK,LASER,LASER_END4OVERLAY,LASER_END6,LASER_OVERLAY01,LASER_OVERLAYSTATIC,LASER_STAR2OVER,LASER_START2};
+	public static final String[] OBJECTS = new String[] {CLOUDS1,CLOUDS2,HILL1,HILL2,MOUNTAIN1,MOUNTAIN2,MOUNTAIN3,POINTY_MOUNTAINS,TREE1,GRASS,BTN_LEFT,BTN_RIGHT,BTN_POWER_BLUE,BTN_POWER_GREEN,BTN_POWER_RED,BLOCK,LASER,LASER_END4OVERLAY,LASER_END6,LASER_OVERLAY01,LASER_OVERLAYSTATIC,LASER_STAR2OVER,LASER_START2,BALL_BLUE70,BALL_BLUE60,BALL_BLUE50,BALL_BLUE40,BALL_BLUE30,BALL_BLUE20,BALL_BLUE10};
 	// Game preferences file
 	public static final String PREFERENCES = "gamebase.prefs";
 

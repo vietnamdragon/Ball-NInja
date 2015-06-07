@@ -65,7 +65,7 @@ public class BackGround extends AbstractGameObject{
 		title1.draw(batch, (-SCENE_WIDTH / 2 - 3) , -SCENE_HEIGHT / 6, SCENE_WIDTH,hill1.getRegionHeight());*/
 		//Gdx.app.debug("hill ", String.valueOf(hill1.getRegionWidth()));
 		Color tempColor = batch.getColor();
-		batch.setColor(MathUtil.convertR(226),MathUtil.convertG(237) , MathUtil.convertB(255), 1);
+		//batch.setColor(MathUtil.convertR(226),MathUtil.convertG(237) , MathUtil.convertB(255), 1);
 		float hillPositionY = -SCENE_HEIGHT / 2 + grass.getRegionHeight() - 10;
 		for (int i = 0; i < numberOfHill; i++) {
 			if(i == 0)
