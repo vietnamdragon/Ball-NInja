@@ -129,11 +129,12 @@ public class MenuScreen extends AbstractGameScreen implements InputProcessor{
 			GameBase.ShowMessage("Back again to exit!");
 			Gdx.app.debug("menu back", "menu back");
 			//dispose all singleton
+			BallManager.getInstance().dispose();
 			BackGround.getInstance().dispose();
 			GameScreen.getInstance().dispose();
 			BtnControl.getInstance().dispose();
 			Ninja.getInstance().dispose();
-			BallManager.getInstance().dispose();
+			
 			//2 cai nay dispose sau cung
 			Stores.getInstance().dispose();
 			GameBase.getInstance().dispose();;

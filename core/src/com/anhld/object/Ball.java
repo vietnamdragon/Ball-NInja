@@ -119,17 +119,15 @@ public class Ball extends AbstractGameObject{
 		if(isActive){
 						
 			if(position.x <= -SCENE_WIDTH / 2){
-				
+				updateVelocity(new Vector2(0, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
 				position.x = -SCENE_WIDTH / 2;
 				isBound = true;
-				updateVelocity(new Vector2(0, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
 				attack();
 			}
 			if(position.x >= SCENE_WIDTH / 2 - ball.getRegionWidth()){
-				
+				updateVelocity(new Vector2(0, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
 				position.x = SCENE_WIDTH / 2 - ball.getRegionWidth();
 				isBound = true;
-				updateVelocity(new Vector2(0, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
 				attack();
 			}
 		}
@@ -148,10 +146,11 @@ public class Ball extends AbstractGameObject{
 			//neu chua cham vao bien thi update Y
 			if(!isBound){
 				position.y = a * position.x * position.x + b * position.x + c;
-				if(position.y <= -SCENE_HEIGHT / 2 + BackGround.getInstance().getGrassHeight()) //cham vao day
+				if(position.y <= -SCENE_HEIGHT / 2 + BackGround.getInstance().getGrassHeight()) //cham vao day(den muc tieu)
 				{
-					position.y = -SCENE_HEIGHT / 2 + BackGround.getInstance().getGrassHeight();
 					updateVelocity(new Vector2(0, 0), new Vector2(Float.MAX_VALUE, Float.MAX_VALUE));
+					position.y = -SCENE_HEIGHT / 2 + BackGround.getInstance().getGrassHeight();
+					position.x = nextTarget.x;
 					attack();
 				}
 			}
@@ -185,7 +184,17 @@ public class Ball extends AbstractGameObject{
 		if(isBound) //neu dang o bien thi tinh target dau tien va tinh quy dao chuyen dong
 		{
 			Vector2 ninjaPosition = Ninja.getInstance().getCurrentPosition();
-			float distanceToTarget = MathUtil.getDistance(ninjaPosition.x, 0f, position.x, position.y);
+			float distanceToTarget = 0;
+			if(position.x < 0)//cham vao bien
+				MathUtil.getDistance(ninjaPosition.x, 0f, -SCENE_WIDTH / 2f, 0f);
+			else {
+				MathUtil.getDistance(ninjaPosition.x, 0f, SCENE_WIDTH / 2f, 0f);
+			}
+			if(distanceToTarget > SCENE_WIDTH)
+			{
+				Gdx.app.debug(tag, " current ball " + position.toString());
+				Gdx.app.debug(tag, " distance: " + String.valueOf(distanceToTarget));
+			}
 			int numberOfStep = MathUtils.floor(distanceToTarget / Math.abs(STEP));
 			float nextTargetX;
 			if(position.x < 0){ //left

@@ -94,14 +94,14 @@ public class BtnControl extends AbstractGameObject implements InputProcessor,Dis
 				btnLeft.getRegionWidth(), btnLeft.getRegionHeight());
 		if (bounds.contains(tmp.x, tmp.y)) {
 			Gdx.app.debug("left click", "left click");
-			GameScreen.getInstance().UpdateVolecityNinja(-50, 0);
+			GameScreen.getInstance().UpdateVolecityNinja(-120, 0);
 			sLeft.setScale(1.2f);
 		}
 		bounds.set(rightPosition.x, rightPosition.y,
 				btnRight.getRegionWidth(), btnRight.getRegionHeight());
 		if (bounds.contains(tmp.x, tmp.y)) {
 			Gdx.app.debug("right click", "right click");
-			GameScreen.getInstance().UpdateVolecityNinja(50, 0);
+			GameScreen.getInstance().UpdateVolecityNinja(120, 0);
 			sRight.setScale(1.2f);
 		}
 		bounds.set(powerPosition.x, powerPosition.y,
